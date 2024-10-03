@@ -1,2 +1,2 @@
 # ewas
-Exome-wide associatio mapping for insecticided associated genes
+Exome-wide association mapping for insecticide resistance associated genes
