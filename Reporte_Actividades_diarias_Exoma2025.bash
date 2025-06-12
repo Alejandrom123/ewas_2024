@@ -30,7 +30,7 @@ samtools sort -o HLR1_sbs_bwt2_sortd.bam HLR1_subsample_bowtie2.bam
 samtools index HLR1_sbs_bwt2_sortd.bam
 
 Añadir Read Groups
-Primero exclusivamente con HLR1 bwa:
+Mapeo con BWA
 Pasar a bam:
 samtools view -S -b HLR1_subsample_BWA.sam> HLR1_subsample_BWA.bam
 samtools sort -o HLR1_sbs_BWA_sortd.bam HLR1_subsample_BWA.bam
@@ -64,7 +64,7 @@ Aedes_aegypti_lvpagwg
 
 java -jar /data1/softwares/snpEff/snpEff.jar Aedes_aegypti_lvpagwg -c /data1/softwares/snpEff/snpEff.config tu_archivo.vcf > tu_archivo_annotated.vcf
 
-/mnt/disc2/grupobcei/java/jdk-24.0.1/bin/java -jar /mnt/disc2/grupobcei/ewas/ewas_Acacias/snpEff/snpEff.jar Aedes_aegypti_lvpagwg -c /mnt/disc2/grupobcei/ewas/ewas_Acacias/snpEff/snpEff.config HLR1_filt_10x.vcf > HLR1_GATK_annotated.vcf
+/mnt/disc2/grupobcei/java/jdk-24.0.1/bin/java -jar /mnt/disc2/grupobcei/ewas/ewas_Acacias/snpEff/snpEff.jar Aedes_aegypti_lvpagwg -c /mnt/disc2/grupobcei/ewas/ewas_Acacias/snpEff/snpEff.config HLR1_filt_10x.vcf > HLR1_GATK_annotated.vcf 
 
 
 
@@ -81,3 +81,8 @@ gatk --java-options "-Xmx4g" RealignerTargetCreator -R reference.fasta -I HLR1_B
 
 /mnt/disc2/grupobcei/java/jdk-17.0.12/bin/java -Xmx30g -jar /home/administrador/programas/gatk-4.6.1.0/gatk-package-4.6.1.0-local.jar BaseRecalibrator -R /mnt/disc2/grupobcei/ewas/index/VectorBase-68_AaegyptiLVP_AGWG_Genome.fasta -I HLR1_BWA_-nodups.bam -O HLR1_BWA_recal_data.table
 
+#########################################################################
+###############################12-06-2025#################################
+#########################################################################
+
+Realicé ordenamiento de script en Script_exoma
