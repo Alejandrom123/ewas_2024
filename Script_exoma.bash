@@ -11,12 +11,12 @@ bwa mem -t 30 -M /mnt/disc2/grupobcei/ewas/index/VectorBase-68_AaegyptiLVP_AGWG_
     #Mapeo Automático BWA
     #EN PYTHON -> bucle_mapp_BWA.py 
 
-#Pasar de SAM a BAM
+#Pasar de SAM a BAM 
 samtools view -S -b HLR1_subsample_BWA.sam > HLR1_subsample_BWA.bam
 samtools sort -o HLR1_sbs_BWA_sortd.bam HLR1_subsample_BWA.bam
 samtools index HLR1_sortd_index.bam
     #samtools automático 
-    #
+    #Bucle está en "/mnt/disc2/grupobcei/ewas/ewas_Acacias/02.1_ewas_trimmed_subsample/bucle_samtools.py"
 
 #Read group #Adiciona una serie de columnas necesarias para los pasos subsecuentes. "Assigns all the reads in a file to a single new read-group"
 /mnt/disc2/grupobcei/java/jdk-17.0.12/bin/java -jar /mnt/disc2/grupobcei/picard/picard.jar AddOrReplaceReadGroups I=HLR1_sbs_BWA_sortd.bam O=HLR1_BWA_rg.bam SO=coordinate CREATE_INDEX=true RGID=HLR1 RGLB=lib1 RGPL=illumina RGPU=HLR1 RGSM=sample1
