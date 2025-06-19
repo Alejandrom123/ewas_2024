@@ -1,0 +1,1 @@
+nohup bash -c 'for file in *.sam; do samtools stats "$file" > "${file%.sam}.stats.txt"; done' > nohup.out 2>&1 &
