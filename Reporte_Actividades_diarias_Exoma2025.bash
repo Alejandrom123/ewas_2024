@@ -1,3 +1,4 @@
+Indicaciones Iniciales
 #########################################################################
 ######################### Indicaciones iniciales##############################
 #########################################################################
@@ -21,7 +22,7 @@ A fecha de 17-06-2025 lo que estoy trabajando está en el servidor de biología
 Ubicación de lo de EWAS en general
 #Samples in /mnt/disc2/grupobcei/ewas/ in 172.16.0.96 (grupobcei) server
 
-
+Más cosas iniciales
 #########################################################################
 ################################################################
 #########################################################################
@@ -42,6 +43,7 @@ Al realizar el script por separado, los porcentajes son los mismos. Procedo a ha
 	Realicé el index con BWA
 	Realicé el bucle del mapeo con BWA, hay que correrlo mañana
 
+10-06-2025
 #########################################################################
 ###############################10-06-2025#################################
 #########################################################################
@@ -90,7 +92,7 @@ java -jar /data1/softwares/snpEff/snpEff.jar Aedes_aegypti_lvpagwg -c /data1/sof
 
 /mnt/disc2/grupobcei/java/jdk-24.0.1/bin/java -jar /mnt/disc2/grupobcei/ewas/ewas_Acacias/snpEff/snpEff.jar Aedes_aegypti_lvpagwg -c /mnt/disc2/grupobcei/ewas/ewas_Acacias/snpEff/snpEff.config HLR1_filt_10x.vcf > HLR1_GATK_annotated.vcf 
 
-
+12-06-2025
 #########################################################################
 ###############################12-06-2025#################################
 #########################################################################
@@ -99,6 +101,7 @@ Realicé ordenamiento de script en Script_exoma
 Y realicé samtools bucle para view, sort y luego index. 
 Se deja corriendo
 
+17-06-2025
 #########################################################################
 ###############################17-06-2025#################################
 #########################################################################
@@ -107,7 +110,7 @@ Se deja corriendo
 Comando luego de samtools es read groups: 
 /mnt/disc2/grupobcei/java/jdk-17.0.12/bin/java -jar /mnt/disc2/grupobcei/picard/picard.jar AddOrReplaceReadGroups I=HLR1_sbs_BWA_sortd.bam O=HLR1_BWA_rg.bam SO=coordinate CREATE_INDEX=true RGID=HLR1 RGLB=lib1 RGPL=illumina RGPU=HLR1 RGSM=sample1
 
-
+18-06-2025
 #########################################################################
 ###############################18-06-2025#################################
 #########################################################################
@@ -129,6 +132,7 @@ Están las métricas del mapeo
 
 La muestra HLR1 parece que está mala.  
 
+19-06-2025 
 #########################################################################
 ###############################19-06-2025#################################
 #########################################################################
@@ -151,6 +155,7 @@ Volví a cargar la muestra HLR1 desde mi tera y funcionó. HLR1 percentage of pr
 
 Aquí va el bucle variantes. bucle_variantes.py
 
+24-06-2025 Aquí está el script largo con el bucle_variantes.py
 #########################################################################
 ###############################24-06-2025#################################
 #########################################################################
@@ -519,9 +524,202 @@ o	Corrección Benjamini-Hochberg por cromosoma
 41.	https://pmc.ncbi.nlm.nih.gov/articles/PMC9870988/
 42.	https://toolshed.g2.bx.psu.edu/repository/display_tool?changeset_revision=cf2af5c3118c&render_repository_actions_for=tool_shed&repository_id=5f7d83aa4f577607&tool_config=%2Fsrv%2Ftoolshed%2Fmain%2Fvar%2Fdata%2Frepos%2F000%2Frepo_417%2Fallele-counts.xml
 
+26-06-2025
+#########################################################################
+###############################26-06-2025#################################
+#########################################################################
+
+Voy a hacer mpileup y las modificaciones con varscan que me Saul Lozano específico
+Hay que instalar Varscan
+
+samtools mpileup -f /data/black_lab/ReferenceSeqs/test_Aaegl5_map/VectorBase-68_AaegyptiLVP_AGWG_Genome.fasta Col_perm_A1_replica1_sorted.bam > Col_perm_A1_replica1.pileup
+Bucle mpileup
+
+Ya hice el bucle en Python, se llama bucle_variantes.py
+
+28-06-2025
+#########################################################################
+###############################28-06-2025#################################
+#########################################################################
+
+Hice un archivo de metadata. 
+
+Según IA: 
+Modelos estadísticos:
+•	Para EWAS, usa regresión logística en PLINK ajustando por componentes principales (PCAs) para controlar ancestría6:
+
+plink --vcf annotated.vcf --pheno pheno.txt --logistic --covar pca_covariates.txt  --out ewas_results
+
+ Corrección y visualización
+•	Corrección múltiple:
+Aplica corrección de Bonferroni o FDR a los p-valores usando R:
+
+results <- read.table("ewas_results.assoc.logistic", header=TRUE) results$FDR <- p.adjust(results$P, method="fdr")
+
+30-06-2025
+#########################################################################
+###############################30-06-2025#################################
+#########################################################################
+
+Ya tengo los readcoutns con varscan?
+Verificar. 
+
+Tengo varias opciones. 
+
+Pipeline Saul	Recomendado NSTC	Protocolo.io 
+ Sortd.bam	BWA	Pileup.bam
+Samtools mpileup 	Variant Calling: FreeBayes/Varscan (Correct for ploidy and pooled settings)	Pairwise FST:
+Poolfstat (R)
+Nozeros.pileup	Allele Frequency Extraction: Bcftools/Variant Caller (Allele Frequency Extraction)	Heatmap in R
+Convertir mpileup to Readcounts: Varscan	Statistical Comparison: PoPoolation2  (CMH test of Fisher’s Exact Test in R)	Nucleotide diversity:
+PoPoolation (Repetir para cada pool)
+t test 
+Linear regression 
+Modifying Varscan readcount files. Readcounts_mod (Chrom-y t/)	Filtering Significant SNPs: Based on p-values, FDR correction 	
+FORTRAN	Annotation: SnpEff or ANNOVAR for functional impact	
+Visualization: 
+Manhattan plots, volcano plots	Visualization: 
+Manhattan plots, volcano plots	
+
+TAREAS
+MÉTRICAS DE BWA
+MERGE DE LOS ARCHIVOS DE GATK 
+Continuar con el pipeline
+-	Hacerlo con el nozero.pileup 
+•	perl /mnt/disc2/grupobcei/ewas/ewas_Acacias/popoolation2-master/mpileup2sync.pl --input HLR1_no_zeros.pileup --ouput HLR1.sync
+•	perl /mnt/disc2/grupobcei/ewas/ewas_Acacias/popoolation2-master/mpileup2sync.pl --input HLR2_no_zeros.pileup --ouput HLR2.sync
+•	perl /mnt/disc2/grupobcei/ewas/ewas_Acacias/popoolation2-master/mpileup2sync.pl --input SP1_no_zeros.pileup --ouput SP1.sync
+•	perl /mnt/disc2/grupobcei/ewas/ewas_Acacias/popoolation2-master/mpileup2sync.pl --input SP2_no_zeros.pileup --ouput SP2.sync 
+
+-	Si no da con ese hacer las correcciones que dice en protocols.io y seguir con ese protocolo
+
+Need an mpileup for all pools and one for each pool individually.  
+
+Trabajar con los .mpileup -> .sync -> Ejecutar analisis 
+Trabajar con los archivos .readcounts
+
+01-07-2025 Recapitulación SAM->BAM->samtools view -q 20	-> samtools sort -> samtools mpileup -B -Q 0 XX.mpileup -> mpileup2sync.jar -> HLR1_HLR2_SP1_SP2.sync -> poolfstat_R.r
+#########################################################################
+###############################01-07-2025#################################
+#########################################################################
+
+Hay que agregar un -B -Q 0  al código de samtools mpileup. 
+
+Recapitulación: 
+1.	Realicé el paso de samtools view y sort con los archivos .BAM y un calidad de 20. Esto está en script_original_popoolation2.bash. 
+2.	Luego con el sort creé el mpileup 
+3.	Luego con el mpileup creé el .sync
+4.	Luego ese lo utilicé como insumo para poolfstat_R.r (Script en R) 
+LA EVIDENCIA MUESTRAS QUE DEBIDO A LA BAJA COBERTURA, 
 
 
 
+Thanks — this is great progress! Your relaxed filters worked:
+✅ 745,071 SNPs retained after filtering — that's a strong dataset.
+________________________________________
+❗ Error Explanation
+You got this error:
+Error in is.data.frame(x) : 
+  no slot of name "snp.read.counts" for this object of class "pooldata"
+That means this line is failing:
+write.csv(pool_file@snp.read.counts, file = "SNP_read_counts.csv", row.names = FALSE)
+Because @snp.read.counts is not a valid slot in the new pooldata object — it likely doesn’t exist anymore in the version of the poolfstat package you're using.
+________________________________________
+✅ Fix: Check valid slots
+You can see the available slots with:
+slotNames(pool_file)
+You’ll probably see something like:
+[1] "refallele.readcount" "readcoverage" "snp.names" ...
+To get SNP data or read counts, use the correct slots:
+🔁 Instead of @snp.read.counts, try:
+write.csv(pool_file@refallele.readcount, file = "refallele_readcounts.csv", row.names = FALSE)
+write.csv(pool_file@readcoverage, file = "total_coverage.csv", row.names = FALSE)
+These two matrices give you:
+•	refallele.readcount: Number of reads supporting the reference allele for each SNP in each pool
+•	readcoverage: Total read depth per SNP per pool
+________________________________________
+✅ Updated Code Snippet for Output
+# Guardar matrices de lectura si existen
+write.csv(pool_file@refallele.readcount, file = "refallele_readcounts.csv", row.names = FALSE)
+write.csv(pool_file@readcoverage, file = "total_coverage.csv", row.names = FALSE)
+If you want to join them into one table (optional):
+readcount_df <- as.data.frame(pool_file@refallele.readcount)
+coverage_df <- as.data.frame(pool_file@readcoverage)
+combined_df <- cbind(readcount_df, coverage_df)
+write.csv(combined_df, file = "SNP_readcounts_and_coverage.csv", row.names = FALSE)
+________________________________________
+✅ Summary
+Fix	Action
+❌ @snp.read.counts	🔄 Replace with @refallele.readcount and @readcoverage
+✅	Use slotNames(pool_file) to explore valid components
+💡	You can save per-SNP metrics or coverage matrices now
+Would you like to also:
+•	Export the list of SNP positions and alleles?
+•	Get a summary table per chromosome?
+Let me know!
+
+JULIO 02-07-2025 Resumen en Excel de pipelines
+o	El resumen de los pipelines está en inputs_outputs
+o	Lo que estoy haciendo es una mezcla de samtools con el bam mapeado con BWA unos pocos filtros de ese samtools. 
+-	Luego se crea un mpileup
+•	Luego con mpileup2sync. Jar se crea el sync
+•	Luego usando R con el archivo poolfstat_R.r
+Esto está bueno: 
+https://www.cyted.org/assets/img/redes/511/evento/1_TALLER_FENO_AXEL.pdf
+diapo 65 para crear los archivos .ped
+
+JULIO 07-07-2025 Pipeline GWAS Cristian Velarde modificado por Alejandro Mejía
+Empieza desde los VCFs merged. -> el script original se llama (association_gwas_MOD.sh) el scrpt mío está en script_exoma.bash. 
+Index – tabix
+Plin.bim
+AWK -> plink_fixed.bim
+	Duplicados.dupbar
+		Plink_final + Archivo phenotype.txt
+			PLINK GWAS: resultados.gwas.assoc
+			
+JULIO 08-07-2025 Joint Genotyping
+Se creó el archivo “Script_GATK_jointgenotyping_PLINK” para llamado de variantes desde 02_MarkDuplicates. 
+En este se usa el llamado de variantes con el modo G y luego se combinan los gVCFs y luego se hace el joint genotyping. 
+
+JULIO 09-07-2025 Repetición llamado de variantes con GATK jointgenotyping
+Se crea combine_joint_GWAS.bash en servidor /mnt/disc2/grupobcei/ewas/ewas_Acacias/02.1_ewas_trimmed_subsample/02_MarkDuplicates/ para realizar: 
+-	Combinado de gvcfs
+-	Joint de gvcf
+-	Comprimido
+-	Index
+-	Pling
+-	GWAS 
+Los resultados deberían de estar en /mnt/disc2/grupobcei/ewas/ewas_Acacias/02.1_ewas_trimmed_subsample/resultados_plink/resultados_gwas.assoc > /mnt/disc2/grupobcei/ewas/ewas_Acacias/02.1_ewas_trimmed_subsample/resultados_plink/
+Lo que hay que hacer mañana: 
+-	Ver si sí hay variantes y con esta nueva aproximación sí funciona.
+•	Al parecer necesito mínimo 10 muestras para calcular el coeficiente de inbreeding. REVISAR
+ 
+-	Mirar sí el genotipo sigue estando raro. 
+-	Mirar lo de karla en el drive 
+-	Mirar lo de llegar hasta especies en lo de microbiota. 
+JULIO 10-07-2025 Reunión Omar Triana. Repetición llamado de variantes con GATK jointgenotyping
+-	Los readgroups están malos. (RGSM). 
+-	Hay que volver a crear los archivos .bam 
+o	Se habló con Omar. Conclusiones: 
+-	Mirar las bacterias burkholderia y Pseudomonas viridiflava. 
+-	Hacer un merge entre los datos de RNAseq upregulated y las variantes encontradas. Mirar sí hay solapamiento.
+JULIO 11-07-2025 Tareas pendientes y recapitulación. 
+Se debe de hacer el joint genotyping nuevamente, basado en el RGSM (Read Groups Nuevo). Porque está tomando las dos réplicas como una sola. Hay que hacer prácticamente todo el “Pipeline GATK” y modificar el bucles_variantes.py. NO ES PRIORIDAD. 
+Hay que hacer un merge. Ya sea con Python o con R de los archivos VCF y los genes Upregulated o downregualted. Pero primero hacer el filtro para solo los
+Cómo leer un archivo VCF en Python o en R? R/ como tengo los archivos en .txt y en xlsx puedo hacerlo con R o con Python. 
+Cómo quitar dejar solamente el Header del archivo VCF?R/ como ya es un archivo .txt es más fácil.
+El código GATK_snpeff.py tiene la forma de poner los archivos snpeff.txt. 
+Cómo hacer para filtrar únicamente las variantes que pasaron el filtro?
+
+/mnt/disc2/grupobcei/ewas/ewas_Acacias/bcftools/bcftools-1.22/bcftools view -f PASS HLR1_GATK_annotated.vcf -o HLR1_GATK_annotated_PASS.vcf
+
+
+
+
+
+
+
+Restantes 
 #########################################################################
 ###############################Restantes#################################
 #########################################################################
