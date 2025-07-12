@@ -22,20 +22,20 @@ SNPEFF_DB = "Aedes_aegypti_lvpagwg"
 
 # Tabla RG info
 RG_info = {
-    "HLR1": {"RGID": "HLR1", "RGLB": "lib1", "RGPL": "illumina", "RGPU": "HLR1", "RGSM": "HLR"},
-    "HLR2": {"RGID": "HLR2", "RGLB": "lib1", "RGPL": "illumina", "RGPU": "HLR2", "RGSM": "HLR"},
-    "HLS1": {"RGID": "HLS1", "RGLB": "lib1", "RGPL": "illumina", "RGPU": "HLS1", "RGSM": "HLS"},
-    "HLS2": {"RGID": "HLS2", "RGLB": "lib1", "RGPL": "illumina", "RGPU": "HLS2", "RGSM": "HLS"},
-    "LL1": {"RGID": "LL1", "RGLB": "lib1", "RGPL": "illumina", "RGPU": "LL1", "RGSM": "LL"},
-    "LL2": {"RGID": "LL2", "RGLB": "lib1", "RGPL": "illumina", "RGPU": "LL2", "RGSM": "LL"},
-    "HPR1": {"RGID": "HPR1", "RGLB": "lib1", "RGPL": "illumina", "RGPU": "HPR1", "RGSM": "HPR"},
-    "HPR2": {"RGID": "HPR2", "RGLB": "lib1", "RGPL": "illumina", "RGPU": "HPR2", "RGSM": "HPR"},
-    "HPS1": {"RGID": "HPS1", "RGLB": "lib1", "RGPL": "illumina", "RGPU": "HPS1", "RGSM": "HPS"},
-    "HPS2": {"RGID": "HPS2", "RGLB": "lib1", "RGPL": "illumina", "RGPU": "HPS2", "RGSM": "HPS"},
-    "LP1": {"RGID": "LP1", "RGLB": "lib1", "RGPL": "illumina", "RGPU": "LP1", "RGSM": "LP"},
-    "LP2": {"RGID": "LP2", "RGLB": "lib1", "RGPL": "illumina", "RGPU": "LP2", "RGSM": "LP"},
-    "SP1": {"RGID": "SP1", "RGLB": "lib1", "RGPL": "illumina", "RGPU": "SP1", "RGSM": "SP"},
-    "SP2": {"RGID": "SP2", "RGLB": "lib1", "RGPL": "illumina", "RGPU": "SP2", "RGSM": "SP"},
+    "HLR1": {"RGID": "HLR1", "RGLB": "lib1", "RGPL": "illumina", "RGPU": "HLR1", "RGSM": "HLR1"},
+    "HLR2": {"RGID": "HLR2", "RGLB": "lib1", "RGPL": "illumina", "RGPU": "HLR2", "RGSM": "HLR2"},
+    "HLS1": {"RGID": "HLS1", "RGLB": "lib1", "RGPL": "illumina", "RGPU": "HLS1", "RGSM": "HLS1"},
+    "HLS2": {"RGID": "HLS2", "RGLB": "lib1", "RGPL": "illumina", "RGPU": "HLS2", "RGSM": "HLS2"},
+    "LL1": {"RGID": "LL1", "RGLB": "lib1", "RGPL": "illumina", "RGPU": "LL1", "RGSM": "LL1"},
+    "LL2": {"RGID": "LL2", "RGLB": "lib1", "RGPL": "illumina", "RGPU": "LL2", "RGSM": "LL2"},
+    "HPR1": {"RGID": "HPR1", "RGLB": "lib1", "RGPL": "illumina", "RGPU": "HPR1", "RGSM": "HPR1"},
+    "HPR2": {"RGID": "HPR2", "RGLB": "lib1", "RGPL": "illumina", "RGPU": "HPR2", "RGSM": "HPR2"},
+    "HPS1": {"RGID": "HPS1", "RGLB": "lib1", "RGPL": "illumina", "RGPU": "HPS1", "RGSM": "HPS1"},
+    "HPS2": {"RGID": "HPS2", "RGLB": "lib1", "RGPL": "illumina", "RGPU": "HPS2", "RGSM": "HPS2"},
+    "LP1": {"RGID": "LP1", "RGLB": "lib1", "RGPL": "illumina", "RGPU": "LP1", "RGSM": "LP1"},
+    "LP2": {"RGID": "LP2", "RGLB": "lib1", "RGPL": "illumina", "RGPU": "LP2", "RGSM": "LP2"},
+    "SP1": {"RGID": "SP1", "RGLB": "lib1", "RGPL": "illumina", "RGPU": "SP1", "RGSM": "SP1"},
+    "SP2": {"RGID": "SP2", "RGLB": "lib1", "RGPL": "illumina", "RGPU": "SP2", "RGSM": "SP2"},
 }
 
 samples = list(RG_info.keys())
