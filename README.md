@@ -35,15 +35,15 @@ Use *bucle_pileup_varscan.py*
 As S. lozano put it: This pipeline is a series of programs to analyze genome nucleotide variants read counts and to compare the similitude within two replicates. Later, we compare two phenotypically different groups. 
 
 *Required programs.
-spliter.r
-physmap.r
-	physmap.cpp
-ven2x2.r
-easy_chi2.r
-	easy_chi.cpp
-	easy_chi_fun.r
-annotate.r
-replace.r
+spliter.r,
+physmap.r,
+	physmap.cpp,
+ven2x2.r,
+easy_chi2.r,
+	easy_chi.cpp,
+	easy_chi_fun.r,
+annotate.r,
+replace.r,
 
 #The programs are the .r files previously mentioned, however I did some loops for, you guess it, stream line the process. 
 
