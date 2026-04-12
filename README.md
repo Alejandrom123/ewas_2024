@@ -1,5 +1,4 @@
-# ewas
-Exome-wide association mapping for insecticide resistance associated genes
+Exome-wide association mapping for insecticide resistance associated genes & other files to perform SNP search using more common programs
 =======
 # ewas_2024
 Code for detection of SNP´s and exome modifications in insecticide resistant insects. 
